@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { ChevronDown, Menu, X } from 'lucide-react'
-import cielLogo from '../assets/CielElectricLogo.jpg'
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ChevronDown, Menu, X } from "lucide-react";
+import cielLogo from "../assets/CielElectricLogo.jpg";
 
 const Navigation = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false)
-  const location = useLocation()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
+  const location = useLocation();
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-  const toggleAboutDropdown = () => setIsAboutDropdownOpen(!isAboutDropdownOpen)
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleAboutDropdown = () =>
+    setIsAboutDropdownOpen(!isAboutDropdownOpen);
 
-  const isActive = (path) => location.pathname === path
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
@@ -27,25 +28,25 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className={`px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive('/') 
-                    ? 'text-blue-600 border-b-2 border-blue-600' 
-                    : 'text-gray-900 hover:text-blue-600'
+                  isActive("/")
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-900 hover:text-blue-600"
                 }`}
               >
                 Home
               </Link>
-              
+
               {/* About Us Dropdown */}
               <div className="relative">
                 <button
                   onClick={toggleAboutDropdown}
                   className={`px-3 py-2 text-sm font-medium flex items-center transition-colors ${
-                    isActive('/about') 
-                      ? 'text-blue-600 border-b-2 border-blue-600' 
-                      : 'text-gray-900 hover:text-blue-600'
+                    isActive("/about") || isActive("/management-profile")
+                      ? "text-blue-600 border-b-2 border-blue-600"
+                      : "text-gray-900 hover:text-blue-600"
                   }`}
                 >
                   About Us
@@ -53,15 +54,15 @@ const Navigation = () => {
                 </button>
                 {isAboutDropdownOpen && (
                   <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
-                    <Link 
-                      to="/about#company-profile" 
+                    <Link
+                      to="/about#company-profile"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => setIsAboutDropdownOpen(false)}
                     >
                       Company Profile
                     </Link>
-                    <Link 
-                      to="/about#management-profile" 
+                    <Link
+                      to="/management-profile"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => setIsAboutDropdownOpen(false)}
                     >
@@ -71,42 +72,42 @@ const Navigation = () => {
                 )}
               </div>
 
-              <Link 
-                to="/projects" 
+              <Link
+                to="/projects"
                 className={`px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive('/projects') 
-                    ? 'text-blue-600 border-b-2 border-blue-600' 
-                    : 'text-gray-900 hover:text-blue-600'
+                  isActive("/projects")
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-900 hover:text-blue-600"
                 }`}
               >
                 Our Projects
               </Link>
-              <Link 
-                to="/quotation" 
+              <Link
+                to="/quotation"
                 className={`px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive('/quotation') 
-                    ? 'text-blue-600 border-b-2 border-blue-600' 
-                    : 'text-gray-900 hover:text-blue-600'
+                  isActive("/quotation")
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-900 hover:text-blue-600"
                 }`}
               >
                 Get a Quotation
               </Link>
-              <Link 
-                to="/career" 
+              <Link
+                to="/career"
                 className={`px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive('/career') 
-                    ? 'text-blue-600 border-b-2 border-blue-600' 
-                    : 'text-gray-900 hover:text-blue-600'
+                  isActive("/career")
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-900 hover:text-blue-600"
                 }`}
               >
                 Career
               </Link>
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className={`px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive('/contact') 
-                    ? 'text-blue-600 border-b-2 border-blue-600' 
-                    : 'text-gray-900 hover:text-blue-600'
+                  isActive("/contact")
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-900 hover:text-blue-600"
                 }`}
               >
                 Contact Us
@@ -114,10 +115,17 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button onClick={toggleMenu} className="text-gray-900 hover:text-blue-600">
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <button
+              onClick={toggleMenu}
+              className="text-gray-900 hover:text-blue-600"
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -126,50 +134,50 @@ const Navigation = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
-              <Link 
-                to="/about#company-profile" 
+              <Link
+                to="/about#company-profile"
                 className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Company Profile
               </Link>
-              <Link 
-                to="/about#management-profile" 
+              <Link
+                to="/management-profile"
                 className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Management Profile
               </Link>
-              <Link 
-                to="/projects" 
+              <Link
+                to="/projects"
                 className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Our Projects
               </Link>
-              <Link 
-                to="/quotation" 
+              <Link
+                to="/quotation"
                 className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Get a Quotation
               </Link>
-              <Link 
-                to="/career" 
+              <Link
+                to="/career"
                 className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Career
               </Link>
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -180,8 +188,7 @@ const Navigation = () => {
         )}
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navigation
-
+export default Navigation;
