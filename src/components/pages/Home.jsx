@@ -67,7 +67,7 @@ const Home = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-3 text-lg transition-transform transform hover:scale-105"
+                className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg transition-transform transform hover:scale-105"
               >
                 <Link to="/contact">Book an Appointment</Link>
               </Button>
