@@ -8,7 +8,8 @@ const ManagementProfile = () => {
     <div className="min-h-screen bg-white">
       <section id="management-profile" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          {/* Section Header */}
+          <div className="text-center mb-12 animate-fadeInUp">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Management Profile
             </h1>
@@ -17,18 +18,25 @@ const ManagementProfile = () => {
             </p>
           </div>
 
+          {/* CEO Card */}
           <div className="max-w-5xl mx-auto">
-            <Card className="bg-white shadow-xl overflow-hidden border border-gray-100">
+            <Card className="bg-white shadow-xl overflow-hidden border border-gray-100 transform transition-all duration-500 hover:shadow-2xl hover:scale-[1.01] animate-fadeIn">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 {/* CEO Image */}
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 flex items-center justify-center">
                   <div className="text-center">
-                    <img
-                      src={khalidImage}
-                      alt="Khalid Masood - CEO of Ciel Electric"
-                      className="w-64 h-64 object-cover rounded-full mx-auto mb-6 shadow-lg border-4 border-white"
-                    />
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    <div className="relative group">
+                      {/* Floating Glow Effect */}
+                      <div className="absolute inset-0 rounded-full bg-blue-300 opacity-0 blur-2xl group-hover:opacity-40 transition duration-500"></div>
+
+                      {/* Image */}
+                      <img
+                        src={khalidImage}
+                        alt="Khalid Masood - CEO of Ciel Electric"
+                        className="w-64 h-64 object-cover rounded-full mx-auto mb-6 shadow-lg border-4 border-white transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl"
+                      />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-1 transition-all duration-500 group-hover:text-blue-700">
                       Khalid Masood
                     </h3>
                     <p className="text-lg text-blue-600 font-semibold">
@@ -86,6 +94,26 @@ const ManagementProfile = () => {
           </div>
         </div>
       </section>
+
+      {/* Tailwind keyframes for fade-in */}
+      <style>
+        {`
+          @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+          .animate-fadeInUp {
+            animation: fadeInUp 1s ease-out forwards;
+          }
+          .animate-fadeIn {
+            animation: fadeIn 1.2s ease-out forwards;
+          }
+        `}
+      </style>
     </div>
   );
 };
