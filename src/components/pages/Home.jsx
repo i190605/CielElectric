@@ -119,7 +119,7 @@ const Home = () => {
             transition={{ duration: 0.6 }}
           >
             <motion.img
-              src="src/components/pages/img.png"
+              src="src\assets\img.png"
               alt="CIEL Electric Introduction"
               className="shadow-lg w-full object-cover border border-gray-200"
               initial={{ opacity: 0, scale: 0.95 }}
