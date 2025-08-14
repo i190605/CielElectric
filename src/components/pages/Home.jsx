@@ -353,18 +353,6 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Minimal Footer */}
-      <footer className="bg-blue-950 text-white py-6 text-center">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="text-blue-300 text-sm"
-        >
-          © {new Date().getFullYear()} CIEL Electric. All rights reserved.
-        </motion.p>
-      </footer>
     </div>
   );
 };

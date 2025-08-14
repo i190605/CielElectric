@@ -22,12 +22,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/management-profile" element={<ManagementProfile />} />
-
           <Route path="/projects" element={<Projects />} />
           <Route path="/quotation" element={<GetQuotation />} />
           <Route path="/career" element={<Career />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFoundPage />} /> {/* Catch-all route for 404 */} 
+          <Route path="*" element={<NotFoundPage />} />{" "}
+          {/* Catch-all route for 404 */}
         </Routes>
 
         {/* Footer */}
@@ -35,7 +35,7 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="text-gray-400">
-                Copyright © 2024 Ciel Electric - All Rights Reserved.
+                Copyright © 2025 Ciel Electric - All Rights Reserved.
               </p>
             </div>
           </div>
@@ -46,5 +46,3 @@ function App() {
 }
 
 export default App;
-
-
