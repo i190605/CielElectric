@@ -8,6 +8,7 @@ import GetQuotation from "./components/pages/GetQuotation";
 import Career from "./components/pages/Career";
 import Contact from "./components/pages/Contact";
 import ManagementProfile from "./components/pages/ManagementProfile";
+import NotFoundPage from "./components/pages/NotFoundPage"; // Import your NotFoundPage component
 
 import "./App.css";
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/quotation" element={<GetQuotation />} />
           <Route path="/career" element={<Career />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFoundPage />} /> {/* Catch-all route for 404 */} 
         </Routes>
 
         {/* Footer */}
@@ -44,3 +46,5 @@ function App() {
 }
 
 export default App;
+
+
