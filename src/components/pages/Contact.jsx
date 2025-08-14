@@ -165,7 +165,7 @@ const Contact = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-3"
+              className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3"
               asChild
             >
               <a href="tel:+92518480204">Call Now: +92 51 8480204</a>

@@ -22,9 +22,26 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
+// Reusable Animations
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const floatAnimation = {
+  initial: { y: 0 },
+  animate: {
+    y: [0, -4, 0],
+    transition: { repeat: Infinity, duration: 2, ease: "easeInOut" },
+  },
 };
 
 const Home = () => {
@@ -43,34 +60,55 @@ const Home = () => {
             animate="visible"
             variants={fadeUp}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+            <motion.h1
+              className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg"
+              animate={{
+                scale: [1, 1.03, 1],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 3.5,
+                ease: "easeInOut",
+              }}
+            >
               YOUR STEP TO A{" "}
-              <span className="text-yellow-400">SUSTAINABLE FUTURE!</span>
-            </h1>
-            <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+              <span className="text-yellow-400 shimmer">
+                SUSTAINABLE FUTURE!
+              </span>
+            </motion.h1>
+            <motion.p
+              className="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed text-blue-100"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+            >
               Headquartered in Islamabad, CIEL Electric provides cutting-edge
               platform solutions supported by personal customer care and the
               most extensive warranty in the sector.
-            </p>
+            </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
             >
-              <Button
-                size="lg"
-                className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg transition-transform transform hover:scale-105"
-              >
-                <Link to="/quotation">Get a Free Quote</Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg transition-transform transform hover:scale-105"
-              >
-                <Link to="/contact">Book an Appointment</Link>
-              </Button>
+              <motion.div variants={fadeUp} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg shadow-lg"
+                >
+                  <Link to="/quotation">Get a Free Quote</Link>
+                </Button>
+              </motion.div>
+              <motion.div variants={fadeUp} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg shadow-lg"
+                >
+                  <Link to="/contact">Book an Appointment</Link>
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -79,7 +117,6 @@ const Home = () => {
       {/* Intro Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Text */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -96,36 +133,39 @@ const Home = () => {
               excellence at every step of the journey.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-blue-900 hover:bg-blue-800 text-white px-6 py-3">
-                <Link to="/company-profile">Company Profile</Link>
-              </Button>
-              <Button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3">
-                <Link to="/projects">Our Projects</Link>
-              </Button>
-              <Button
-                variant="outline"
-                className="border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white px-6 py-3"
-              >
-                <Link to="/contact">Contact Us</Link>
-              </Button>
+              {[
+                { text: "Company Profile", link: "/company-profile" },
+                { text: "Our Projects", link: "/projects" },
+                { text: "Contact Us", link: "/contact" },
+              ].map((btn, i) => (
+                <motion.div
+                  key={i}
+                  variants={floatAnimation}
+                  initial="initial"
+                  animate="animate"
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ delay: i * 0.2 }}
+                >
+                  <Button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 shadow-lg">
+                    <Link to={btn.link}>{btn.text}</Link>
+                  </Button>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Image */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
             <motion.img
               src="https://i.postimg.cc/t4BvKRVK/img.png"
               alt="CIEL Electric Introduction"
-              className="shadow-lg w-full object-cover border border-gray-200"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
+              className="shadow-lg w-full object-cover border border-gray-200 rounded-lg"
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 150 }}
             />
           </motion.div>
         </div>
@@ -149,50 +189,58 @@ const Home = () => {
             </p>
           </motion.div>
 
-          {/* Responsive grid: 1 on small, 2 on medium, 3 on large */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {[
               {
                 icon: Sun,
                 title: "Customized Solar Solutions",
-                desc: "Our team of experts will design a system tailored to your specific energy needs, ensuring maximum efficiency and cost savings.",
+                desc: "Our team designs systems tailored to your energy needs for maximum efficiency.",
               },
               {
                 icon: Zap,
                 title: "Solar Panel Maintenance",
-                desc: "We provide regular check-ups and cleaning to ensure your panels are operating at peak performance year-round.",
+                desc: "Regular check-ups & cleaning ensure peak performance year-round.",
               },
               {
                 icon: Shield,
                 title: "Battery Backup Systems",
-                desc: "Keep the lights on during outages with our reliable battery storage solutions, designed to work seamlessly with your solar setup.",
+                desc: "Reliable battery storage keeps your lights on during outages.",
               },
               {
                 icon: Users,
                 title: "Solar Panel Financing",
-                desc: "We offer flexible payment plans that make switching to solar affordable for everyone.",
+                desc: "Flexible payment plans make switching to solar affordable.",
               },
               {
                 icon: Sun,
                 title: "Case Studies",
-                desc: "See real-world examples of how our systems have helped businesses and homeowners reduce energy costs.",
+                desc: "Real-world examples of cost savings for businesses & homeowners.",
               },
               {
                 icon: Users,
                 title: "Frequently Asked Questions",
-                desc: "Get clear answers to the most common questions about switching to solar energy.",
+                desc: "Clear answers to common solar energy questions.",
               },
             ].map((service, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
+                variants={fadeUp}
+                whileHover={{
+                  scale: 1.04,
+                  rotateX: 4,
+                  rotateY: 4,
+                }}
+                transition={{ type: "spring", stiffness: 150 }}
               >
-                <Card className="h-full flex flex-col hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+                <Card className="h-full flex flex-col transition-all duration-300">
                   <CardHeader>
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 animate-bounce">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                       <service.icon className="h-6 w-6 text-blue-600" />
                     </div>
                     <CardTitle className="text-lg sm:text-xl font-semibold">
@@ -207,7 +255,7 @@ const Home = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -225,12 +273,11 @@ const Home = () => {
               Connect With Us
             </h2>
             <p className="text-lg text-blue-100">
-              Ready to start your solar journey? Get in touch with our experts
-              today.
+              Ready to start your solar journey? Get in touch today.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {[
               {
                 icon: Phone,
@@ -250,11 +297,12 @@ const Home = () => {
             ].map((contact, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 150 }}
               >
-                <div className="flex flex-col items-center hover:scale-105 transition-transform">
+                <div className="flex flex-col items-center">
                   <div className="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center mb-4 shadow-md">
                     <contact.icon className="h-6 w-6 text-blue-900" />
                   </div>
@@ -278,20 +326,45 @@ const Home = () => {
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            {[Facebook, Instagram, Linkedin].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-yellow-400 transition-transform transform hover:scale-110"
-              >
-                <Icon className="h-8 w-8" />
-              </a>
-            ))}
+            <a
+              href="https://www.facebook.com/cielelectric"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-yellow-400 transition-transform transform hover:scale-110"
+            >
+              <Facebook className="h-8 w-8" />
+            </a>
+            <a
+              href="https://www.instagram.com/cielelectric/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-yellow-400 transition-transform transform hover:scale-110"
+            >
+              <Instagram className="h-8 w-8" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/ciel-electric/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-yellow-400 transition-transform transform hover:scale-110"
+            >
+              <Linkedin className="h-8 w-8" />
+            </a>
           </motion.div>
         </div>
       </section>
+
+      {/* Minimal Footer */}
+      <footer className="bg-blue-950 text-white py-6 text-center">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="text-blue-300 text-sm"
+        >
+          © {new Date().getFullYear()} CIEL Electric. All rights reserved.
+        </motion.p>
+      </footer>
     </div>
   );
 };
