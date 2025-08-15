@@ -21,6 +21,33 @@ import {
   Linkedin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+const CountUpNumber = ({ end, suffix = "", className = "" }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000; // animation time in ms
+    const increment = end / (duration / 16); // ~60fps
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        start = end;
+        clearInterval(timer);
+      }
+      setCount(Math.floor(start));
+    }, 16);
+    return () => clearInterval(timer);
+  }, [end]);
+
+  return (
+    <h3 className={className}>
+      {count}
+      {suffix}
+    </h3>
+  );
+};
 
 // Reusable Animations
 const fadeUp = {
@@ -167,6 +194,73 @@ const Home = () => {
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 150 }}
             />
+          </motion.div>
+        </div>
+      </section>
+      {/* Stats Section */}
+      <section className="py-16 bg-blue-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Our Impact So Far
+            </h2>
+            <p className="text-lg text-blue-100">
+              Leading the way towards a greener, cleaner future
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {[
+              { value: 5000, label: "Systems Installed", suffix: "+" },
+              { value: 277, label: "Solar Produced", suffix: "MWh" },
+              { value: 100, label: "CO₂ Reduced", suffix: "k Tonnes" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 150 }}
+              >
+                <CountUpNumber
+                  end={stat.value}
+                  suffix={stat.suffix}
+                  className="text-4xl md:text-5xl font-bold text-yellow-400 mb-2"
+                />
+                <p className="text-lg text-blue-100">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="mt-10 flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+          >
+            <a
+              href="https://www.instagram.com/stories/highlights/18036438976961057/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                size="lg"
+                className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg shadow-lg"
+              >
+                See Our Client Reviews
+              </Button>
+            </a>
           </motion.div>
         </div>
       </section>
