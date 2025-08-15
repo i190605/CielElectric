@@ -245,34 +245,27 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Instagram CTA Section */}
-      <section className="py-12 bg-gradient-to-r from-purple-600 to-pink-500 text-white text-center">
+      {/* Footer Section */}
+      <footer className="py-12 bg-blue-900 text-white text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-            See More Amazing Projects
-          </h2>
-          <p className="mb-6 text-sm sm:text-base">
-            Follow us on Instagram for the latest updates and behind-the-scenes
-            looks at our work.
-          </p>
           <a
-            href="https://www.instagram.com/cielelectric/"
+            href="https://www.instagram.com/stories/highlights/18036438976961057/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Button
               size="lg"
-              className="bg-white text-pink-600 font-semibold px-6 py-3 hover:bg-gray-200 flex items-center gap-2"
+              className="bg-white text-blue-600 font-semibold px-6 py-3 hover:bg-gray-200"
             >
-              <Instagram className="h-5 w-5" /> Visit Instagram
+              See Our More Projects
             </Button>
           </a>
         </motion.div>
-      </section>
+      </footer>
     </div>
   );
 };
